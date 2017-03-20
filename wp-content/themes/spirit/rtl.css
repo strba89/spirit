@@ -1,0 +1,249 @@
+/*
+Theme Name: Spirit
+
+Adding support for language written in a Right To Left (RTL) direction is easy -
+it's just a matter of overwriting all the horizontal positioning attributes
+of your CSS stylesheet in a separate stylesheet file named rtl.css.
+
+http://codex.wordpress.org/Right_to_Left_Language_Support
+
+*/
+
+/* =Reset
+-------------------------------------------------------------- */
+
+caption, th, td {
+	text-align: right;
+}
+
+/* =Global
+----------------------------------------------- */
+
+/* Text elements */
+
+ul, ol {
+	margin: 0 3em 1.8em 0;
+}
+
+ul ul, ol ol, ul ol, ol ul {
+	margin-right: 1.8em;
+	margin-left: auto;
+}
+
+blockquote {
+	border-right: 5px solid #d12d2f;
+	border-left: none;
+}
+
+textarea {
+	padding-right: 3px;
+	padding-left: 0;
+}
+
+/* Alignment */
+.alignright {
+	float: right;
+	margin-left: 1.8em;
+	margin-right: auto;
+}
+
+.alignleft {
+	float: left;
+	margin-right: 1.8em;
+	margin-left: auto;
+}
+
+
+/* =Layout
+----------------------------------------------- */
+
+#primary {
+	float: right;
+	margin: 0 0 3.6em -25%;
+}
+
+.active-sidebar #content {
+	margin: 0 0 0 28%;
+}
+
+#secondary {
+	float: left;
+}
+
+#tertiary {
+	clear: left;
+}
+
+
+/* =Menu
+----------------------------------------------- */
+
+.main-navigation {
+	float: right;
+}
+
+.main-navigation ul {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.main-navigation ul ul {
+	float: right;
+	right: 0;
+	text-align: right;
+	left: auto;
+}
+
+.main-navigation ul ul ul {
+	right: 100%;
+	left: auto;
+}
+
+/* Small menu */
+.menu-toggle {
+	padding-right: .75em;
+	padding-left: 0;
+}
+
+.menu-toggle:before {
+	right: 0;
+	left: auto;
+}
+
+.main-small-navigation .menu > ul {
+	text-align: right;
+}
+
+
+/* =Content
+----------------------------------------------- */
+
+.sticky:before {
+	background: url('images/holly-right.png') no-repeat;
+	right: -30px;
+	left: auto;
+}
+
+
+/* =Navigation
+----------------------------------------------- */
+
+.site-content .nav-previous,
+.prev-image {
+	float: right;
+}
+
+.site-content .nav-next,
+.next-image {
+	float: left;
+	text-align: left;
+}
+
+
+/* =Comments
+----------------------------------------------- */
+
+.commentlist ul.children {
+	margin: 0 1.8em 0 0;
+}
+
+.comment-author .avatar {
+	float: right;
+	margin: 0 0 0 1.8em;
+}
+
+.comment-content {
+	margin: 1.8em 76px 0 0;
+}
+
+a.comment-reply-link {
+	float: left;
+}
+
+a#cancel-comment-reply-link {
+	float: left;
+}
+
+.comment-form-author input,
+.comment-form-email input,
+.comment-form-url input {
+	float: left;
+}
+
+
+/* =Widgets
+----------------------------------------------- */
+
+/* Search widget */
+.search-icon {
+	right: 135px;
+	left: auto;
+}
+
+.search-icon:before {
+	right: 0;
+	left: auto;
+}
+
+.search-icon:after {
+	right: 12px;
+	left: auto;
+}
+
+/* Calendar widget */
+
+#wp-calendar #next {
+	text-align: left;
+}
+
+#wp-calendar #prev {
+	text-align: right;
+}
+
+
+/* =Footer
+----------------------------------------------- */
+
+.site-info:before {
+	right: 100px;
+	left: auto;
+}
+
+#colophon:before {
+	right: 0;
+	left: auto;
+}
+
+#colophon:after {
+	right: 0;
+	left: auto;
+}
+
+
+/* =Snowflakes
+----------------------------------------------- */
+
+#snowflakes-1,
+#snowflakes-2 {
+	right: 0;
+	left: auto;
+}
+
+
+@media screen and ( max-width: 56em ) {
+
+	.hentry:before {
+		right: auto;
+		left: 0;
+	}
+
+}
+
+@media screen and ( max-width: 44em ) {
+
+	.site-info:before {
+		right: 0;
+		left: auto;
+	}
+
+}
