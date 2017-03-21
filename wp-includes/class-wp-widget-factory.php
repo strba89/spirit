@@ -150,3 +150,4 @@ class WP_Widget_Factory {
 		}
 	}
 }
+

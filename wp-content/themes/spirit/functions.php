@@ -89,17 +89,60 @@ add_action( 'after_setup_theme', 'spirit_content_width', 0 );
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function spirit_widgets_init() {
-	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'spirit' ),
-		'id'            => 'sidebar-1',
-		'description'   => esc_html__( 'Add widgets here.', 'spirit' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+//        register_sidebar( array(
+//            'name'          => esc_html__( 'Sidebar', 'spirit' ),
+//            'id'            => 'sidebar-1',
+//            'description'   => esc_html__( 'Add widgets here.', 'spirit' ),
+//            'before_widget' => '<section id="%1$s" class="widget %2$s">',
+//            'after_widget'  => '</section>',
+//            'before_title'  => '<h2 class="widget-title">',
+//            'after_title'   => '</h2>',
+//        ) );
+
+
+        register_sidebar( array(
+            'name'          => esc_html__( 'About Us section', 'spirit' ),
+            'id'            => 'about-us',
+            'description'   => esc_html__( 'Add widgets here.', 'spirit' ),
+            'before_widget' => '<li><span class="fa fa-dot-circle-o"></span>',
+            'after_widget'  => '</li>',
+            'before_title'  => '<strong>',
+            'after_title' => '</strong> - ',
+            'before_body'  => '<em>',
+            'after_body'   => '</em>',
+        ) );
+        register_sidebar( array(
+            'name'          => esc_html__( 'Team page', 'wedding-theme' ),
+            'id'            => 'team_page',
+            'description'   => esc_html__( 'Add widgets here.', 'wedding-theme' ),
+            'before_widget' => '<div class="item"><div class="thumbnail">',
+            'after_widget'  => ' </div></div>',
+            'before_title'  => '<div class="caption"><h3>',
+            'after_title'   => '</h3>',
+            'before_body'  => '<p>',
+            'after_body'   => '</p>',
+            'before_text'  => '<p>',
+            'after_text'   => '</p></div>',
+
+        ) );
+//        register_sidebar( array(
+//            'name'          => esc_html__( 'Footer', 'spirit' ),
+//            'id'            => 'footer',
+//            'description'   => esc_html__( 'Add widgets here.', 'spirit' ),
+//            'before_widget' => '<div class="four columns">',
+//            'after_widget'  => '</div>',
+//            'before_title'  => '<h2 class="widget-title">',
+//            'after_title'   => '</h2>',
+//        ) );
+
+    add_action( 'widgets_init', 'wedding_theme_widgets_init' );
 }
+
 add_action( 'widgets_init', 'spirit_widgets_init' );
+/**
+ * Register new Widget area and position it after the header.
+ */
+
 
 /**
  * Enqueue scripts and styles.
@@ -111,7 +154,7 @@ function spirit_scripts() {
     wp_enqueue_style('font_awesome', get_template_directory_uri() . "/fonts/font-awesome/css/font-awesome.css");
     wp_enqueue_style('owl1', get_template_directory_uri() . "/style/owl.carousel.css");
     wp_enqueue_style('owl2', get_template_directory_uri() . "/style/owl.theme.css");
-    wp_enqueue_style('style', get_template_directory_uri() . "/style/style.css");
+    wp_enqueue_style('style', get_template_directory_uri() . "/style/style.css?809");
     wp_enqueue_style('responsive', get_template_directory_uri() . "/style/responsive.css");
 
 
@@ -157,9 +200,179 @@ require get_template_directory() . '/inc/extras.php';
 /**
  * Customizer additions.
  */
-//require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/customizer.php';
 
 /**
  * Load Jetpack compatibility file.
  */
 //require get_template_directory() . '/inc/jetpack.php';
+
+class Features_Widget extends WP_Widget {
+
+    /**
+     * Register widget with WordPress.
+     */
+    function __construct() {
+        parent::__construct(
+            'features_widget', // Base ID
+            esc_html__( 'Features Widget', 'spirit' ) // Name
+//            array( 'description' => esc_html__( 'A text with title and icon', 'spirit' ), ) // Args
+        );
+    }
+
+    /**
+     * Front-end display of widget.
+     *
+     * @see WP_Widget::widget()
+     *
+     * @param array $args     Widget arguments.
+     * @param array $instance Saved values from database.
+     */
+    public function widget( $args, $instance ) {
+
+        echo $args['before_widget'];
+        if ( ! empty( $instance['title'] ) ) {
+            echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
+        }
+        echo $instance['body'];
+        echo $args['after_widget'];
+    }
+
+    /**
+     * Back-end widget form.
+     *
+     * @see WP_Widget::form()
+     *
+     * @param array $instance Previously saved values from database.
+     */
+    public function form( $instance ) {
+        $title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( 'New title', 'text_domain' );
+        $body = ! empty( $instance['body'] ) ? $instance['body'] : esc_html__( '', 'text_domain' );
+        ?>
+        <p>
+
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_attr_e( 'Title:', 'text_domain' ); ?></label>
+            <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+        </p>
+        <p>
+
+            <label for="<?php echo esc_attr( $this->get_field_id( 'body' ) ); ?>"><?php esc_attr_e( 'Text:', 'text_domain' ); ?></label>
+            <textarea class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'body' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'body' ) ); ?>" cols="30" rows="10"><?php echo esc_attr( $body ); ?></textarea>
+        </p>
+        <?php
+    }
+
+    /**
+     * Sanitize widget form values as they are saved.
+     *
+     * @see WP_Widget::update()
+     *
+     * @param array $new_instance Values just sent to be saved.
+     * @param array $old_instance Previously saved values from database.
+     *
+     * @return array Updated safe values to be saved.
+     */
+    public function update( $new_instance, $old_instance ) {
+        $instance = array();
+        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['body'] = ( ! empty( $new_instance['body'] ) ) ? strip_tags( $new_instance['body'] ) : '';
+        return $instance;
+    }
+
+}
+class Team_Widget extends WP_Widget {
+
+    /**
+     * Register widget with WordPress.
+     */
+    function __construct() {
+        parent::__construct(
+            'team_widget', // Base ID
+            esc_html__( 'Team Widget', 'spirit' ), // Name
+            array( 'description' => esc_html__( 'A text with title and icon', 'spirit' ), ) // Args
+        );
+    }
+
+    /**
+     * Front-end display of widget.
+     *
+     * @see WP_Widget::widget()
+     *
+     * @param array $args     Widget arguments.
+     * @param array $instance Saved values from database.
+     */
+    public function widget( $args, $instance ) {
+
+        echo $args['before_widget'];
+        echo '<img src="'.esc_url($instance['image_uri']).'" />';
+        if ( ! empty( $instance['title'] ) ) {
+            echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
+        }
+        echo $instance['text'];
+        echo $instance['body'];
+        echo $args['after_widget'];
+    }
+
+    /**
+     * Back-end widget form.
+     *
+     * @see WP_Widget::form()
+     *
+     * @param array $instance Previously saved values from database.
+     */
+    public function form( $instance ) {
+        $title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( 'New title', 'text_domain' );
+        $body = ! empty( $instance['body'] ) ? $instance['body'] : esc_html__( '', 'text_domain' );
+        $text = ! empty( $instance['text'] ) ? $instance['text'] : esc_html__( '', 'text_domain' );
+        $icon = ! empty( $instance['icon'] ) ? $instance['icon'] : esc_html__( '', 'text_domain' );
+        ?>
+        <p>
+
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_attr_e( 'Title:', 'text_domain' ); ?></label>
+            <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+        </p>
+        <p>
+
+            <label for="<?php echo esc_attr( $this->get_field_id( 'body' ) ); ?>"><?php esc_attr_e( 'Description:', 'text_domain' ); ?></label>
+            <textarea class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'body' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'body' ) ); ?>" cols="3" rows="3"><?php echo esc_attr( $body ); ?></textarea>
+        </p>
+        <p>
+
+            <label for="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>"><?php esc_attr_e( 'Text:', 'text_domain' ); ?></label>
+            <textarea class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'text' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>" cols="30" rows="10"><?php echo esc_attr( $text ); ?></textarea>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('image_uri'); ?>">Image</label><br />
+            <input type="text" class="img" name="<?php echo $this->get_field_name('image_uri'); ?>" id="<?php echo $this->get_field_id('image_uri'); ?>" value="<?php echo $instance['image_uri']; ?>" />
+            <input type="button" class="select-img" value="Select Image" />
+        </p>
+        <?php
+    }
+
+    /**
+     * Sanitize widget form values as they are saved.
+     *
+     * @see WP_Widget::update()
+     *
+     * @param array $new_instance Values just sent to be saved.
+     * @param array $old_instance Previously saved values from database.
+     *
+     * @return array Updated safe values to be saved.
+     */
+    public function update( $new_instance, $old_instance ) {
+        $instance = array();
+        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['body'] = ( ! empty( $new_instance['body'] ) ) ? strip_tags( $new_instance['body'] ) : '';
+        $instance['text'] = ( ! empty( $new_instance['text'] ) ) ? strip_tags( $new_instance['text'] ) : '';
+        $instance['icon'] = ( ! empty( $new_instance['icon'] ) ) ? strip_tags( $new_instance['icon'] ) : '';
+
+        return $instance;
+    }
+
+}
+function register_features_widget() {
+    register_widget( 'Features_Widget' );
+    register_widget( 'Team_Widget' );
+}
+
+add_action( 'widgets_init', 'register_features_widget' );

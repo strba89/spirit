@@ -117,7 +117,6 @@ font-weight: 900;
 	}
 /* Home Style */
 #tf-home{
-	background: url(../img/01.jpg);
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
@@ -538,7 +537,7 @@ button.btn.tf-btn.btn-default {
 .btn.active.focus {
 	outline: thin dotted;
 	outline: none;
-	outline-offset: none;
+	outline-offset: 0;
 }
 /* Footer */
 nav#footer{
@@ -569,3 +568,4 @@ nav#footer p{
 	background: #FCAC45;
 	border-color: #FCAC45;
 	color: #ffffff;
+}
