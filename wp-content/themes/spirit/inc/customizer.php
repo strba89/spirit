@@ -66,37 +66,37 @@ function spirit_theme_customize_register( $wp_customize ) {
             )
         )
     );
-    $wp_customize->add_section( 'spirit_aboutUs_page_section' , array(
-        'title'    => __( 'About Us Page Settings', 'spirit' ),
-        'priority' => 11
-    ) );
-    $wp_customize->add_setting( 'spirit_title_aboutUs' , array(
-        'default'   => 'SOME WORDS',
-        'transport' => 'refresh',
-    ) );
-    $wp_customize->add_setting(
-        'image_aboutUs',
-        array(
-            'default'      => get_template_directory() .' /img/02.png',
-            'transport'    => 'refresh'
-        )
-    );
-    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'title_aboutUs', array(
-        'label'    => __( 'Title', 'spirit' ),
-        'section'  => 'spirit_aboutUs_page_section',
-        'settings' => 'spirit_title_aboutUs',
-    ) ) );
-    $wp_customize->add_control(
-        new WP_Customize_Image_Control(
-            $wp_customize,
-            'image_aboutUs',
-            array(
-                'label'    => 'About Us Page Image',
-                'settings' => 'image_aboutUs',
-                'section'  => 'spirit_aboutUs_page_section'
-            )
-        )
-    );
+//    $wp_customize->add_section( 'spirit_aboutUs_page_section' , array(
+//        'title'    => __( 'About Us Page Settings', 'spirit' ),
+//        'priority' => 11
+//    ) );
+//    $wp_customize->add_setting( 'spirit_title_aboutUs' , array(
+//        'default'   => 'SOME WORDS',
+//        'transport' => 'refresh',
+//    ) );
+//    $wp_customize->add_setting(
+//        'image_aboutUs',
+//        array(
+//            'default'      => get_template_directory() .' /img/02.png',
+//            'transport'    => 'refresh'
+//        )
+//    );
+//    $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'title_aboutUs', array(
+//        'label'    => __( 'Title', 'spirit' ),
+//        'section'  => 'spirit_aboutUs_page_section',
+//        'settings' => 'spirit_title_aboutUs',
+//    ) ) );
+//    $wp_customize->add_control(
+//        new WP_Customize_Image_Control(
+//            $wp_customize,
+//            'image_aboutUs',
+//            array(
+//                'label'    => 'About Us Page Image',
+//                'settings' => 'image_aboutUs',
+//                'section'  => 'spirit_aboutUs_page_section'
+//            )
+//        )
+//    );
 
 //    class jpen_Example_Widget extends WP_Widget {
 //        /**
