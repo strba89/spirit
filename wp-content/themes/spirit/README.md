@@ -1,4 +1,3 @@
-A merry and bright blogging theme. Happy holidays!
 
 
 Changelog

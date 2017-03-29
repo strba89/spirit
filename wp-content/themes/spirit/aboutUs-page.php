@@ -22,26 +22,12 @@ if ( $query->have_posts() ) {
             <div class="col-md-6">
                 <div class="about-text">
                     <div class="section-title">
-                        <h4><?= get_field('subtilte')?></h4>
-                        <h2><?php the_title()?></strong></h2>
+                        <h4><?php the_title()?></h4>
+                        <h2><?= get_field('subtitle')?></strong></h2>
                         <hr>
                         <div class="clearfix"></div>
                     </div>
                     <p class="intro"><?php the_content()?></p>
-                    <ul class="about-list">
-                        <li>
-                            <span class="fa fa-dot-circle-o"></span>
-                            <strong>Mission</strong> - <em>We deliver uniqueness and quality</em>
-                        </li>
-                        <li>
-                            <span class="fa fa-dot-circle-o"></span>
-                            <strong>Skills</strong> - <em>Delivering fast and excellent results</em>
-                        </li>
-                        <li>
-                            <span class="fa fa-dot-circle-o"></span>
-                            <strong>Clients</strong> - <em>Satisfied clients thanks to our experience</em>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
