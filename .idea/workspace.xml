@@ -2,33 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45965eed-a887-4f16-a751-e547685c24fa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/screenshot.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/clients-page.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/contact-page.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/portfolio-page.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/services-page.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/testimonials-page.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/db_spirit.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/images/holly-left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/images/holly.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/images/snowbackground.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/images/snowbackground2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/images/snowflakes.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/images/texture-background.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/images/texture-blue-dark.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/images/texture-blue.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/images/texture-transparent.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/images/tree.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/screenshot.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/README.md" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/aboutUs-page.php" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/aboutUs-page.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/footer.php" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/footer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/functions.php" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/functions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/home-template.php" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/home-template.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/js/customizer.js" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/js/customizer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/js/main.js" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/spirit/style.css" afterPath="$PROJECT_DIR$/wp-content/themes/spirit/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db_spirit.sql" afterPath="$PROJECT_DIR$/db_spirit.sql" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -532,12 +507,20 @@
       <workItem from="1490612632074" duration="7072000" />
       <workItem from="1490750344326" duration="2128000" />
       <workItem from="1490788751061" duration="234000" />
-      <workItem from="1490791179976" duration="8211000" />
+      <workItem from="1490791179976" duration="9145000" />
     </task>
+    <task id="LOCAL-00001" summary="add pages">
+      <created>1490801959594</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1490801959594</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67853000" />
+    <option name="totallyTimeSpent" value="68787000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -595,6 +578,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="add pages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
