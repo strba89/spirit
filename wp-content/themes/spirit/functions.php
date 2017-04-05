@@ -46,6 +46,9 @@ function spirit_setup() {
 	register_nav_menus( array(
 		'header' => esc_html__( 'Header', 'spirit' ),
 	) );
+    register_nav_menus( array(
+        'gallery_portfolio' => esc_html__( 'Portfolio Gallery', 'spirit' ),
+    ) );
 
 	/*
 	 * Switch default core markup for search form, comment form, and comments
@@ -67,6 +70,8 @@ function spirit_setup() {
 
 	// Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
+    add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
+
 }
 endif;
 add_action( 'after_setup_theme', 'spirit_setup' );
@@ -90,31 +95,14 @@ add_action( 'after_setup_theme', 'spirit_content_width', 0 );
  */
 function spirit_widgets_init() {
 
-//        register_sidebar( array(
-//            'name'          => esc_html__( 'About Us section', 'spirit' ),
-//            'id'            => 'about-us',
-//            'description'   => esc_html__( 'Add widgets here.', 'spirit' ),
-//            'before_widget' => '<li><span class="fa fa-dot-circle-o"></span>',
-//            'after_widget'  => '</li>',
-//            'before_title'  => '<strong>',
-//            'after_title' => '</strong> - ',
-//            'before_body'  => '<em>',
-//            'after_body'   => '</em>',
-//        ) );
+
         register_sidebar( array(
             'name'          => esc_html__( 'Team page', 'spirit' ),
             'id'            => 'team-page',
             'description'   => esc_html__( 'Add widgets here.', 'spirit' ),
-            'before_widget' => '<div id="team" class="owl-carousel owl-theme row">
-                <div class="item">
-                    <div class="thumbnail">',
-            'after_widget'  => '</div></div></div>',
-            'before_title'  => '<div class="caption"><h3>',
-            'after_title'   => '</h3>',
-            'before_body'  => '<p>',
-            'after_body'   => '</p>',
-            'before_text'  => '<p>',
-            'after_text'   => '</p></div>',
+            'before_widget' => '<div class="item">',
+            'after_widget'  => '</div>',
+
 
         ) );
         register_sidebar( array(
@@ -145,10 +133,8 @@ function spirit_widgets_init() {
             'name'          => esc_html__( 'Footer', 'spirit' ),
             'id'            => 'footer',
             'description'   => esc_html__( 'Add widgets here.', 'spirit' ),
-            'before_widget' => '<div class="four columns">',
-            'after_widget'  => '</div>',
-            'before_title'  => '<h2 class="widget-title">',
-            'after_title'   => '</h2>',
+            'before_widget' => '<div class="pull-right fnav"><ul class="footer-social">',
+            'after_widget'  => '</ul></div>',
         ) );
 
 
@@ -214,6 +200,118 @@ function about_us() {
 
 }
 add_action( 'init', 'about_us', 0 );
+// Register Custom Post Type
+// Register Custom Post Type
+function portfolio() {
+
+    $labels = array(
+        'name'                  => _x( 'Portfolio ', 'Post Type General Name', 'text_domain' ),
+        'singular_name'         => _x( 'Portfolio', 'Post Type Singular Name', 'text_domain' ),
+        'menu_name'             => __( 'Portfolio', 'text_domain' ),
+        'name_admin_bar'        => __( 'Portfolio', 'text_domain' ),
+        'archives'              => __( 'Portfolio', 'text_domain' ),
+        'attributes'            => __( 'Item Attributes', 'text_domain' ),
+        'parent_item_colon'     => __( 'Parent Item:', 'text_domain' ),
+        'all_items'             => __( 'All Items', 'text_domain' ),
+        'add_new_item'          => __( 'Add New Item', 'text_domain' ),
+        'add_new'               => __( 'Add New', 'text_domain' ),
+        'new_item'              => __( 'New Item', 'text_domain' ),
+        'edit_item'             => __( 'Edit Item', 'text_domain' ),
+        'update_item'           => __( 'Update Item', 'text_domain' ),
+        'view_item'             => __( 'View Item', 'text_domain' ),
+        'view_items'            => __( 'View Items', 'text_domain' ),
+        'search_items'          => __( 'Search Item', 'text_domain' ),
+        'not_found'             => __( 'Not found', 'text_domain' ),
+        'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+        'featured_image'        => __( 'Featured Image', 'text_domain' ),
+        'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+        'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+        'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+        'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
+        'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+        'items_list'            => __( 'Items list', 'text_domain' ),
+        'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+        'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+    );
+    $args = array(
+        'label'                 => __( 'Portfolio', 'text_domain' ),
+        'description'           => __( 'Portfolio', 'text_domain' ),
+        'labels'                => $labels,
+        'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'post-formats', ),
+        'taxonomies'            => array( 'category', 'post_tag' ),
+        'hierarchical'          => false,
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 5,
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => true,
+        'exclude_from_search'   => false,
+        'publicly_queryable'    => true,
+        'capability_type'       => 'page',
+    );
+    register_post_type( 'Portfolio', $args );
+
+}
+add_action( 'init', 'portfolio', 0 );
+// Register Custom Post Type
+function client() {
+
+    $labels = array(
+        'name'                  => _x( 'Client', 'Post Type General Name', 'text_domain' ),
+        'singular_name'         => _x( 'client', 'Post Type Singular Name', 'text_domain' ),
+        'menu_name'             => __( 'Client', 'text_domain' ),
+        'name_admin_bar'        => __( 'Client', 'text_domain' ),
+        'archives'              => __( 'Client', 'text_domain' ),
+        'attributes'            => __( 'Item Attributes', 'text_domain' ),
+        'parent_item_colon'     => __( 'Parent Item:', 'text_domain' ),
+        'all_items'             => __( 'All Items', 'text_domain' ),
+        'add_new_item'          => __( 'Add New Item', 'text_domain' ),
+        'add_new'               => __( 'Add New', 'text_domain' ),
+        'new_item'              => __( 'New Item', 'text_domain' ),
+        'edit_item'             => __( 'Edit Item', 'text_domain' ),
+        'update_item'           => __( 'Update Item', 'text_domain' ),
+        'view_item'             => __( 'View Item', 'text_domain' ),
+        'view_items'            => __( 'View Items', 'text_domain' ),
+        'search_items'          => __( 'Search Item', 'text_domain' ),
+        'not_found'             => __( 'Not found', 'text_domain' ),
+        'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+        'featured_image'        => __( 'Featured Image', 'text_domain' ),
+        'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+        'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+        'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+        'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
+        'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+        'items_list'            => __( 'Items list', 'text_domain' ),
+        'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+        'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+    );
+    $args = array(
+        'label'                 => __( 'client', 'text_domain' ),
+        'description'           => __( 'client', 'text_domain' ),
+        'labels'                => $labels,
+        'supports'              => array( 'title', 'editor','post-formats', ),
+        'taxonomies'            => array( 'category', 'post_tag' ),
+        'hierarchical'          => false,
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 5,
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => true,
+        'exclude_from_search'   => false,
+        'publicly_queryable'    => true,
+        'capability_type'       => 'page',
+    );
+    register_post_type( 'client', $args );
+
+}
+add_action( 'init', 'client', 0 );
+
 /**
  * Enqueue scripts and styles.
  */
@@ -249,9 +347,20 @@ function spirit_scripts() {
 add_action( 'wp_enqueue_scripts', 'spirit_scripts' );
 
 function add_menuclass($ulclass) {
+
     return preg_replace('/<a /', '<a class="page-scroll"', $ulclass);
 }
 add_filter('wp_nav_menu','add_menuclass');
+
+
+function add_menudata($ulclass) {
+    $data = ['*','web','.photography','.app','.branding'];
+    foreach ($data as $item){
+        return preg_replace('/<a /', '<a data-filter="'. $item.'"', $ulclass);
+    }
+}
+add_filter('wp_nav_menu_data','add_menudata');
+
 /**
  * Implement the Custom Header feature.
  */
@@ -319,7 +428,7 @@ class Features_Widget extends WP_Widget  {
     public function form( $instance ) {
         $title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( 'New title', 'text_domain' );
         $body = ! empty( $instance['body'] ) ? $instance['body'] : esc_html__( '', 'text_domain' );
-        $icon = ! empty( $instance['icon'] ) ? $instance['icon'] : esc_html__( 'fa fa-desktop', 'text_domain' );
+        $icon = ! empty( $instance['icon'] ) ? $instance['icon'] : esc_html__( '', 'text_domain' );
         ?>
         <p>
 
@@ -366,64 +475,41 @@ class Features_Widget extends WP_Widget  {
     }
 
 }
-class Team_Widget extends WP_Widget {
+class Home_Rollover_Widget extends WP_Widget
+{
 
-    /**
-     * Register widget with WordPress.
-     */
-    function __construct($id_base = false, $name = false, $widget_options = array(), $control_options = array() ) {
-        $id_base = ( $id_base ) ? $id_base : 'team_widget';
-        $name = ( $name ) ? $name : __( 'Team Widget', 'spirit' );
-
-        $widget_options = wp_parse_args( $widget_options, array(
-            'classname'   => 'team_widget',
-            'description' => __( 'A text with title and icon', 'spirit' )
-        ) );
-
-        $control_options = wp_parse_args( $control_options, array( 'width' => 300 ) );
-        parent::__construct($id_base, $name, $widget_options, $control_options);
+    public function __construct()
+    {
+        parent::__construct(
+            'home-rollover-widget',
+            'Team Widget',
+            array(
+                'description' => 'Team widget'
+            )
+        );
     }
 
-    /**
-     * Setup widget options.
-     *
-     * Allows child classes to override the defaults.
-     *
-     * @see WP_Widget::construct()
-     */
-
-
-
-
-    function widget( $args, $instance ) {
-        // Return cached widget if it exists.
-        // Filter and sanitize instance data
-        $content = $this->render( $args, $instance );
-        // Cache the generated content.
+    public function widget( $args, $instance )
+    {
+       echo '<div class="item">
+                <div class="thumbnail">
+                    <img src="'.esc_url($instance['image_uri']).'" class="img-circle team-img">
+                    <div class="caption">
+                        <h3>'.esc_html($instance['title']).'</h3>
+                        <p>'.esc_html($instance['body']).'</p>
+                        <p>'.esc_html($instance['text']).'</p>
+                     </div>
+                 </div>
+             </div>';
     }
 
-    /**
-     * Generate the widget output.
-     */
-    function render( $args, $instance ) {
-        // Generate content.
-        return $content;
-    }
-
-    /**
-     * Front-end display of widget.
-     *
-     * @see WP_Widget::form()
-     *
-     * @param array $args     Widget arguments.
-     * @param array $instance Saved values from database.
-     */
-//
-    public function form( $instance ) {
+    public function form( $instance )
+    {
         $title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( 'New title', 'text_domain' );
         $body = ! empty( $instance['body'] ) ? $instance['body'] : esc_html__( '', 'text_domain' );
         $text = ! empty( $instance['text'] ) ? $instance['text'] : esc_html__( '', 'text_domain' );
-        $icon = ! empty( $instance['icon'] ) ? $instance['icon'] : esc_html__( '', 'text_domain' );
+
+        // removed the for loop, you can create new instances of the widget instead
         ?>
         <p>
 
@@ -440,43 +526,34 @@ class Team_Widget extends WP_Widget {
             <label for="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>"><?php esc_attr_e( 'Text:', 'text_domain' ); ?></label>
             <textarea class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'text' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>" cols="30" rows="10"><?php echo esc_attr( $text ); ?></textarea>
         </p>
-        <p class="media-control"
-           data-title="Choose an Image for the Widget"
-           data-update-text="Update Image"
-           data-target=".image-id"
-           data-select-multiple="false">
-
-            <?php echo wp_get_attachment_image( $icon, 'medium', false ); ?>
-
-            <input type="hidden" name="image_id" id="image_id" value="<?php echo $icon; ?>" class="control-target">
-
-            <a href="#" class="button button-img">Choose an Image</a>
-
+        <p>
+            <label for="<?php echo $this->get_field_id('image_uri'); ?>">Image</label><br />
+            <input type="text" class="img" name="<?php echo $this->get_field_name('image_uri'); ?>" id="<?php echo $this->get_field_id('image_uri'); ?>" value="<?php echo $instance['image_uri']; ?>" />
+            <input type="button" class="select-img" value="Select Image" />
         </p>
         <?php
     }
 
-    /**
-     * Sanitize widget form values as they are saved.
-     *
-     * @see WP_Widget::update()
-     *
-     * @param array $new_instance Values just sent to be saved.
-     * @param array $old_instance Previously saved values from database.
-     *
-     * @return array Updated safe values to be saved.
-     */
-    public function update( $new_instance, $old_instance ) {
-        $instance = array();
-        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-        $instance['body'] = ( ! empty( $new_instance['body'] ) ) ? strip_tags( $new_instance['body'] ) : '';
-        $instance['text'] = ( ! empty( $new_instance['text'] ) ) ? strip_tags( $new_instance['text'] ) : '';
-        $instance['icon'] = ( ! empty( $new_instance['icon'] ) ) ? strip_tags( $new_instance['icon'] ) : '';
-
-        return $instance;
-    }
 
 }
+// end class
+
+// init the widget
+add_action( 'widgets_init', create_function('', 'return register_widget("Home_Rollover_Widget");') );
+
+// queue up the necessary js
+function hrw_enqueue($hook)
+{
+    if( $hook != 'widgets.php' )
+        return;
+    wp_enqueue_style('thickbox');
+    wp_enqueue_script('media-upload');
+    wp_enqueue_script('thickbox');
+    // moved the js to an external file, you may want to change the path
+    wp_enqueue_script( 'main' ,get_template_directory_uri() . "/js/img_widget_add.js", [], "", true );
+}
+add_action('admin_enqueue_scripts', 'hrw_enqueue');
+
 class Testimonials_Widget extends WP_Widget {
 
     /**
@@ -553,10 +630,90 @@ class Testimonials_Widget extends WP_Widget {
     }
 
 } // class Foo_Widget
+class Icon_Widget extends WP_Widget  {
+
+    /**
+     * Register widget with WordPress.
+     */
+    function __construct() {
+        parent::__construct(
+            'icon_widget', // Base ID
+            esc_html__( 'Icons Widget', 'spirit' ), // Name
+            array( 'description' => esc_html__( 'icon', 'spirit' ), ) // Args
+        );
+    }
+
+    /**
+     * Front-end display of widget.
+     *
+     * @see WP_Widget::widget()
+     *
+     * @param array $args     Widget arguments.
+     * @param array $instance Saved values from database.
+     */
+    public function widget( $args, $instance ) {
+
+        echo $args['before_widget'];
+        echo '<li><a href="#"><i class="' .$instance['icon'] . '"></i></a></li>';
+        echo $args['after_widget'];
+    }
+
+    /**
+     * Back-end widget form.
+     *
+     * @see WP_Widget::form()
+     *
+     * @param array $instance Previously saved values from database.
+     */
+    public function form( $instance ) {
+        $icon = ! empty( $instance['icon'] ) ? $instance['icon'] : esc_html__( '', 'text_domain' );
+        $title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( 'New title', 'text_domain' );
+        ?>
+
+        <p>
+
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_attr_e( 'Title:', 'text_domain' ); ?></label>
+            <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+        </p>
+        <p>
+
+            <label for="<?php echo esc_attr( $this->get_field_id( 'icon' ) ); ?>"><?php esc_attr_e( 'Icon:', 'text_domain' ); ?></label>
+
+            <select name="<?php echo esc_attr( $this->get_field_name( 'icon' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'icon' ) ); ?>" class="widefat" >
+                <option value="fa fa-facebook" <?= $icon == 'fa fa-facebook' ? "selected" : ""; ?>>facebook</option>
+                <option value="fa fa-dribbble" <?= $icon == 'fa fa-dribbble' ? "selected" : ""; ?>>dribbble</option>
+                <option value="fa fa-google-plus" <?= $icon == 'fa fa-google-plus' ? "selected" : ""; ?>>google plus</option>
+                <option value="fa fa-twitter" <?= $icon == 'fa fa-twitter' ? "selected" : ""; ?>>twitter</option>
+            </select>
+
+        </p>
+        <?php
+    }
+
+    /**
+     * Sanitize widget form values as they are saved.
+     *
+     * @see WP_Widget::update()
+     *
+     * @param array $new_instance Values just sent to be saved.
+     * @param array $old_instance Previously saved values from database.
+     *
+     * @return array Updated safe values to be saved.
+     */
+    public function update( $new_instance, $old_instance ) {
+        $instance = array();
+        $instance['icon'] = ( ! empty( $new_instance['icon'] ) ) ? strip_tags( $new_instance['icon'] ) : '';
+        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+
+        return $instance;
+    }
+
+}
 function register_features_widget() {
     register_widget( 'Features_Widget' );
-    register_widget( 'Team_Widget' );
     register_widget( 'Testimonials_Widget' );
+    register_widget( 'Home_Rollover_Widget' );
+    register_widget( 'Icon_Widget' );
 
 }
 add_action( 'widgets_init', 'register_features_widget' );
@@ -564,3 +721,141 @@ function bullion(){
     return '<span class="fa fa-dot-circle-o"></span>';
 }
 add_shortcode( 'bullion', 'bullion' );
+class Custom_Nav_Menu extends Walker_Nav_Menu {
+    /**
+     * Start the element output.
+     *
+     * @param  string $output Passed by reference. Used to append additional content.
+     * @param  object $item   Menu item data object.
+     * @param  int $depth     Depth of menu item. May be used for padding.
+     * @param  array|object $args    Additional strings. Actually always an
+    instance of stdClass. But this is WordPress.
+     * @return void
+     */
+    function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 )
+    {
+        $classes     = empty ( $item->classes ) ? array () : (array) $item->classes;
+
+        $class_names = join(
+            ' '
+            ,   apply_filters(
+                'nav_menu_css_class'
+                ,   array_filter( $classes ), $item
+            )
+        );
+
+//        ! empty ( $class_names )
+//        and $class_names = ' class="'. esc_attr( $class_names ) . '"';
+
+        $output .= "<li>";
+
+        $attributes  = '';
+
+        ! empty( $item->attr_title )
+        and $attributes .= ' title="'  . esc_attr( $item->attr_title ) .'"';
+        ! empty( $item->target )
+        and $attributes .= ' target="' . esc_attr( $item->target     ) .'"';
+        ! empty( $item->xfn )
+        and $attributes .= ' rel="'    . esc_attr( $item->xfn        ) .'"';
+        ! empty( $item->url )
+        and $attributes .= ' href="'   . esc_attr( $item->url        ) .'"';
+
+        // insert description for top level elements only
+        // you may change this
+        $description = ( ! empty ( $item->description ) and 0 == $depth )
+            ? '<small class="nav_desc">' . esc_attr( $item->description ) . '</small>' : '';
+
+        $title = apply_filters( 'the_title', $item->title, $item->ID );
+        $words  = explode(' ', $title);
+
+        $longestWordLength = 3;
+        $Word = '';
+        $active='';
+        foreach ($words as $word) {
+            if($word == 'All'){
+                $longestWord ='*';
+            }else if (strlen($word) <= $longestWordLength ) {
+                $longestWordLength = strlen($word);
+                $Word = '.'.$word;
+
+            }else{
+                $longestWordLength = strlen($word);
+                $Word = '.'.$word;
+            }
+
+        }
+
+        $item_output = $args->before
+            . '<a data-filter="'.strtolower($Word).'">'
+            . $args->link_before
+            . $title
+            . '</a>'
+            . $args->link_after
+            . $description
+            . $args->after;
+
+        // Since $output is called by reference we don't need to return anything.
+        $output .= apply_filters(
+            'walker_nav_menu_start_el'
+            ,   $item_output
+            ,   $item
+            ,   $depth
+            ,   $args
+        );
+    }
+
+
+}
+
+function get_description($description)
+{
+    $args = array(
+        'post_type'              => array( 'portfolio' ),
+        'posts_per_page'         => '',
+
+    );
+
+    $query = new WP_Query( $args );
+
+    // The Loop
+    if ( $query->have_posts() ) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            global $post;
+            $post_id = 149;
+
+            $image_ids = array();
+            if ($galleries = get_post_galleries($post_id, false)) {
+
+                foreach ($galleries as $gallery) {
+
+                    // pull the ids from each gallery
+                    if (!empty ($gallery['ids'])) {
+
+                        // merge into our final list
+                        $image_ids = array_merge($image_ids, explode(',', $gallery['ids']));
+
+
+                    }
+                }
+            }
+            $image_ids = array_unique($image_ids);
+
+            $img = array();
+
+            foreach ($image_ids as $id) {
+                $my_id = $id;
+                $post_id = get_post($my_id);
+                $content = $post_id->$description;
+                $content = apply_filters($description, $content);
+                $content = str_replace(']]>', ']]>', $content);
+                $content_chars = 238;
+                $modcontent = substr($content, 0, $content_chars);
+                $img = array_merge($img, explode(',', $modcontent));
+            }
+//            print_r ( $img );
+
+        }
+    }
+    return $img;
+}

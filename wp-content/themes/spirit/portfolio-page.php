@@ -17,148 +17,122 @@
             <ul class="cat">
                 <li class="pull-left"><h4>Filter by Type:</h4></li>
                 <li class="pull-right">
-                    <ol class="type">
-                        <li><a href="#" data-filter="*" class="active">All</a></li>
-                        <li><a href="#" data-filter=".web">Web Design</a></li>
-                        <li><a href="#" data-filter=".photography">Photography</a></li>
-                        <li><a href="#" data-filter=".app" >Mobile App</a></li>
-                        <li><a href="#" data-filter=".branding" >Branding</a></li>
-                    </ol>
+
+                        <?php
+                        $args = [
+                            'theme_location'  => 'gallery_portfolio',
+                            'items_wrap'      => '<ol class="type">%3$s</ol>',
+                            'depth'           => 0,
+                            'walker'          => new Custom_Nav_Menu
+                        ];
+
+
+                        wp_nav_menu($args);
+                        ?>
+
                 </li>
             </ul>
             <div class="clearfix"></div>
         </div>
 
         <div id="lightbox" class="row">
+            <?php
+            // WP_Query arguments
+            $args = array(
+                'post_type'              => array( 'portfolio' ),
+                'posts_per_page'         => '',
 
-            <div class="col-sm-6 col-md-3 col-lg-3 branding">
-                <div class="portfolio-item">
-                    <div class="hover-bg">
-                        <a href="#">
-                            <div class="hover-text">
-                                <h4>Logo Design</h4>
-                                <small>Branding</small>
-                                <div class="clearfix"></div>
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <img src="../img/portfolio/01.jpg" class="img-responsive" alt="...">
-                        </a>
-                    </div>
-                </div>
-            </div>
+            );
 
-            <div class="col-sm-6 col-md-3 col-lg-3 photography app">
-                <div class="portfolio-item">
-                    <div class="hover-bg">
-                        <a href="#">
-                            <div class="hover-text">
-                                <h4>Logo Design</h4>
-                                <small>Branding</small>
-                                <div class="clearfix"></div>
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <img src="../img/portfolio/02.jpg" class="img-responsive" alt="...">
-                        </a>
-                    </div>
-                </div>
-            </div>
+            // The Query
+            $query = new WP_Query( $args );
 
-            <div class="col-sm-6 col-md-3 col-lg-3 branding">
-                <div class="portfolio-item">
-                    <div class="hover-bg">
-                        <a href="#">
-                            <div class="hover-text">
-                                <h4>Logo Design</h4>
-                                <small>Branding</small>
-                                <div class="clearfix"></div>
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <img src="../img/portfolio/03.jpg" class="img-responsive" alt="...">
-                        </a>
-                    </div>
-                </div>
-            </div>
+            if ( $query->have_posts() ) {
+                while ( $query->have_posts() ) {
+                    $query->the_post();?>
+            <?php
+                    global $post;
+                    $post_id = 149;
 
-            <div class="col-sm-6 col-md-3 col-lg-3 branding">
-                <div class="portfolio-item">
-                    <div class="hover-bg">
-                        <a href="#">
-                            <div class="hover-text">
-                                <h4>Logo Design</h4>
-                                <small>Branding</small>
-                                <div class="clearfix"></div>
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <img src="../img/portfolio/04.jpg" class="img-responsive" alt="...">
-                        </a>
-                    </div>
-                </div>
-            </div>
+                    $image_ids = array ();
 
-            <div class="col-sm-6 col-md-3 col-lg-3 web">
-                <div class="portfolio-item">
-                    <div class="hover-bg">
-                        <a href="#">
-                            <div class="hover-text">
-                                <h4>Logo Design</h4>
-                                <small>Branding</small>
-                                <div class="clearfix"></div>
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <img src="../img/portfolio/05.jpg" class="img-responsive" alt="...">
-                        </a>
-                    </div>
-                </div>
-            </div>
+                    if ( $galleries = get_post_galleries( $post_id, false ) ) {
 
-            <div class="col-sm-6 col-md-3 col-lg-3 app">
-                <div class="portfolio-item">
-                    <div class="hover-bg">
-                        <a href="#">
-                            <div class="hover-text">
-                                <h4>Logo Design</h4>
-                                <small>Branding</small>
-                                <div class="clearfix"></div>
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <img src="../img/portfolio/06.jpg" class="img-responsive" alt="...">
-                        </a>
-                    </div>
-                </div>
-            </div>
+                        foreach ( $galleries as $gallery ) {
 
-            <div class="col-sm-6 col-md-3 col-lg-3 photography web">
-                <div class="portfolio-item">
-                    <div class="hover-bg">
-                        <a href="#">
-                            <div class="hover-text">
-                                <h4>Logo Design</h4>
-                                <small>Branding</small>
-                                <div class="clearfix"></div>
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <img src="../img/portfolio/07.jpg" class="img-responsive" alt="...">
-                        </a>
-                    </div>
-                </div>
-            </div>
+                            // pull the ids from each gallery
+                            if ( ! empty ( $gallery[ 'ids' ] ) ) {
 
-            <div class="col-sm-6 col-md-3 col-lg-3 web">
-                <div class="portfolio-item">
-                    <div class="hover-bg">
-                        <a href="#">
-                            <div class="hover-text">
-                                <h4>Logo Design</h4>
-                                <small>Branding</small>
-                                <div class="clearfix"></div>
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <img src="../img/portfolio/08.jpg" class="img-responsive" alt="...">
-                        </a>
-                    </div>
-                </div>
-            </div>
+                                // merge into our final list
+                                $image_ids = array_merge( $image_ids, explode( ',', $gallery[ 'ids' ] ) );
+
+
+                            }
+                        }
+                    }
+
+
+                    $image_ids = array_unique( $image_ids );
+
+                    $image_urls = array_map( "wp_get_attachment_url", $image_ids );
+
+                    $description_url = array();
+                    $img_description_and_url =array();
+
+
+                    $_merge_array = array_map(function ($value) {
+                        return  $value['name'];
+                    }, $description_url);
+
+                       $description_url = array( $image_urls, get_description('post_content') ,get_description('post_title') ,get_description('post_excerpt'));
+                    foreach ( $image_urls as $key => $value ) {
+                        $my_key = $key;
+
+                        $_merge_array = array_column($description_url, $my_key);
+                        $img_description_and_url[]= $_merge_array;
+
+
+
+
+
+                    }
+
+                    foreach ( $img_description_and_url as $value  ) {
+
+
+                        echo '<div class="col-sm-6 col-md-3 col-lg-3 '.$value[1].' ">
+                                    <div class="portfolio-item">
+                                        <div class="hover-bg">
+                                            <a href="#">
+                                                <div class="hover-text">
+                                                    <h4>'.$value[2].'</h4>
+                                                    <small>'.$value[3].'</small>
+                                                    <div class="clearfix"></div>
+                                                    <i class="fa fa-plus"></i>
+                                                </div>
+                                                <img src="'.$value[0].'" class="img-responsive" alt="...">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>';
+
+
+                    }
+
+                    ?>
+
+
+                    <?php
+                }
+            } else {
+                // no posts found
+            }
+
+            // Restore original Post Data
+            wp_reset_postdata();
+            ?>
 
         </div>
+
     </div>
 </div>
