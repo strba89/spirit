@@ -274,7 +274,9 @@ function panel($wp_customize){
         'type'=>'text',
         'section'=>'section',
         'settings'=>'setting_demo',
-    ));}
+    ));
+
+}
 
 
     add_action('customize_register','panel');

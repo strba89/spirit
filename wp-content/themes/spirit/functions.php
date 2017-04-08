@@ -346,19 +346,27 @@ function spirit_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'spirit_scripts' );
 
-function add_menuclass($ulclass) {
+function add_menu_class($class, $args) {
+    if($args->theme_location == "header"){
 
-    return preg_replace('/<a /', '<a class="page-scroll"', $ulclass);
-}
-add_filter('wp_nav_menu','add_menuclass');
+    return preg_replace('/<a /', '<a class="page-scroll"', $class);
+    }else if( $args->theme_location == "gallery_portfolio"){
 
 
-function add_menudata($ulclass) {
-    $data = ['*','web','.photography','.app','.branding'];
-    foreach ($data as $item){
-        return preg_replace('/<a /', '<a data-filter="'. $item.'"', $ulclass);
+        return preg_replace('/<a /', '<a ', $class);
+
+
     }
 }
+add_filter('wp_nav_menu','add_menu_class', 10, 2 );
+
+
+//function add_menudata($ulclass) {
+//    $data = ['*','web','.photography','.app','.branding'];
+//    foreach ($data as $item){
+//        return preg_replace('/<a /', '<a data-filter="'. $item.'"', $ulclass);
+//    }
+//}
 add_filter('wp_nav_menu_data','add_menudata');
 
 /**
@@ -773,20 +781,27 @@ class Custom_Nav_Menu extends Walker_Nav_Menu {
         $active='';
         foreach ($words as $word) {
             if($word == 'All'){
-                $longestWord ='*';
-            }else if (strlen($word) <= $longestWordLength ) {
-                $longestWordLength = strlen($word);
-                $Word = '.'.$word;
+                $Word ='*';
+                $active='active';
 
-            }else{
+            }else if (strlen($word) <= $longestWordLength) {
                 $longestWordLength = strlen($word);
                 $Word = '.'.$word;
+                $active='';
+
+
+            }else if ( count($words) == 1){
+                $longestWordLength = strlen($word);
+                $Word = '.'.$word;
+                $active='';
+
+
             }
 
         }
 
         $item_output = $args->before
-            . '<a data-filter="'.strtolower($Word).'">'
+            . '<a href="#" data-filter="'.strtolower($Word).'" class="'.$active.'">'
             . $args->link_before
             . $title
             . '</a>'
